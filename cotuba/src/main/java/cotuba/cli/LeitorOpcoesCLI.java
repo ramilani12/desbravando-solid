@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 
-public class LeitorOpcoesCLI {
+class LeitorOpcoesCLI {
 
     private Path diretorioDosMD;
     private String formato;
@@ -20,23 +20,7 @@ public class LeitorOpcoesCLI {
 
         try {
 
-            var options = new Options();
-
-            var opcaoDeDiretorioDosMD = new Option("d", "dir", true,
-                    "Diretório que contém os arquivos md. Default: diretório atual.");
-            options.addOption(opcaoDeDiretorioDosMD);
-
-            var opcaoDeFormatoDoEbook = new Option("f", "format", true,
-                    "Formato de saída do ebook. Pode ser: pdf ou epub. Default: pdf");
-            options.addOption(opcaoDeFormatoDoEbook);
-
-            var opcaoDeArquivoDeSaida = new Option("o", "output", true,
-                    "Arquivo de saída do ebook. Default: book.{formato}.");
-            options.addOption(opcaoDeArquivoDeSaida);
-
-            var opcaoModoVerboso = new Option("v", "verbose", false,
-                    "Habilita modo verboso.");
-            options.addOption(opcaoModoVerboso);
+            var options = criaOpcoes();
 
             CommandLineParser cmdParser = new DefaultParser();
             var ajuda = new HelpFormatter();
@@ -88,6 +72,33 @@ public class LeitorOpcoesCLI {
         } catch (IOException ex) {
             throw new IllegalArgumentException(ex);
         }
+    }
+
+    /**
+     * Instancia Options e adiciona as opcoes
+     * @return Options
+     */
+    private Options criaOpcoes() {
+
+        var options = new Options();
+
+        var opcaoDeDiretorioDosMD = new Option("d", "dir", true,
+                "Diretório que contém os arquivos md. Default: diretório atual.");
+        options.addOption(opcaoDeDiretorioDosMD);
+
+        var opcaoDeFormatoDoEbook = new Option("f", "format", true,
+                "Formato de saída do ebook. Pode ser: pdf ou epub. Default: pdf");
+        options.addOption(opcaoDeFormatoDoEbook);
+
+        var opcaoDeArquivoDeSaida = new Option("o", "output", true,
+                "Arquivo de saída do ebook. Default: book.{formato}.");
+        options.addOption(opcaoDeArquivoDeSaida);
+
+        var opcaoModoVerboso = new Option("v", "verbose", false,
+                "Habilita modo verboso.");
+        options.addOption(opcaoModoVerboso);
+
+        return options;
     }
 
     public Path getDiretorioDosMD() {
