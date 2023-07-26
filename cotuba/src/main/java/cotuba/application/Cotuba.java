@@ -2,18 +2,28 @@ package cotuba.application;
 
 import cotuba.domain.Capitulo;
 import cotuba.domain.Ebook;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class Cotuba {
+
+    private final GeradorEPUB geradorPDF;
+    private final GeradorEPUB geradorEPUB;
+    private final RenderizadorMDParaHTML renderizador;
+
+    public Cotuba(GeradorEPUB geradorPDF, GeradorEPUB geradorEPUB, RenderizadorMDParaHTML renderizador) {
+        this.geradorPDF = geradorPDF;
+        this.geradorEPUB = geradorEPUB;
+        this.renderizador = renderizador;
+    }
 
     public void executa(ParametrosCotuba parametros) {
 
         var formato = parametros.getFormato();
         var diretorioDosMD = parametros.getDiretorioDosMD();
         var arquivoDeSaida = parametros.getArquivoDeSaida();
-
-        var renderizador = RenderizadorMDParaHTML.cria();
 
         List<Capitulo> capitulos = renderizador.renderiza(diretorioDosMD);
 
@@ -23,13 +33,9 @@ public class Cotuba {
         ebook.setCapitulos(capitulos);
 
         if ("pdf".equals(formato)) {
-
-            var geradorPDF = GeradorPDF.cria();
             geradorPDF.gera(ebook);
 
         } else if ("epub".equals(formato)) {
-
-            var geradorEPUB = GeradorEPUB.cria();
             geradorEPUB.gera(ebook);
 
         } else {
