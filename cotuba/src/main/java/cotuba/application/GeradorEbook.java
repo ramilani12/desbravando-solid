@@ -12,6 +12,8 @@ public interface GeradorEbook {
 
     void gera(Ebook ebook);
 
+    boolean accept(FormatoEbook formato);
+
     Map<String, GeradorEbook> GERADORES = new HashMap<String, GeradorEbook>() {{
         put("pdf", new GeradorPDF());
         put("epub", new GeradorEPUB());

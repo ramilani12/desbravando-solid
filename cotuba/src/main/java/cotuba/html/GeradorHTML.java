@@ -3,6 +3,7 @@ package cotuba.html;
 import cotuba.application.GeradorEbook;
 import cotuba.domain.Capitulo;
 import cotuba.domain.Ebook;
+import cotuba.domain.FormatoEbook;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -49,6 +50,11 @@ public class GeradorHTML implements GeradorEbook {
             throw new IllegalStateException("Erro ao criar o HTML: " + arquivoDeSaida.toAbsolutePath(), ex);
         }
 
+    }
+
+    @Override
+    public boolean accept(FormatoEbook formato) {
+        return FormatoEbook.HTML.equals(formato);
     }
 
     private String obtemNomeDoArquivoHTML(int i, Capitulo capitulo) {
