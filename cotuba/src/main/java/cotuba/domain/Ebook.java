@@ -5,19 +5,11 @@ import java.util.List;
 
 public class Ebook {
 
-    private String formato;
-
     private Path arquivoDeSaida;
 
     private List<Capitulo> capitulos;
 
-    public String getFormato() {
-        return formato;
-    }
-
-    public void setFormato(String formato) {
-        this.formato = formato;
-    }
+    private FormatoEbook formato;
 
     public Path getArquivoDeSaida() {
         return arquivoDeSaida;
@@ -33,6 +25,14 @@ public class Ebook {
 
     public void setCapitulos(List<Capitulo> capitulos) {
         this.capitulos = capitulos;
+    }
+
+    public FormatoEbook getFormato() {
+        return formato;
+    }
+
+    public void setFormato(FormatoEbook formato) {
+        this.formato = formato;
     }
 
     public boolean isUltimoCapitulo(Capitulo capitulo) {
