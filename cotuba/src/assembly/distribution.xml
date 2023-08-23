@@ -12,6 +12,7 @@
             <outputDirectory>${file.separator}</outputDirectory>
             <includes>
                 <include>cotuba.sh</include>
+                <include>cotuba.bat</include>
             </includes>
         </fileSet>
     </fileSets>

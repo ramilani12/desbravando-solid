@@ -1,6 +1,7 @@
 package cotuba.md;
 
 import cotuba.domain.Capitulo;
+import cotuba.plugin.Plugin;
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.Heading;
 import org.commonmark.node.Node;
@@ -61,6 +62,8 @@ public class RenderizadorMDParaHTML {
                             HtmlRenderer renderer = HtmlRenderer.builder().build();
                             String html = renderer.render(document);
                             capitulo.setConteudoHTML(html);
+
+                            Plugin.renderizou(capitulo);
 
                             capitulos.add(capitulo);
 
