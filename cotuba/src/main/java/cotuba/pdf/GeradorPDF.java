@@ -54,6 +54,7 @@ public class GeradorPDF implements GeradorEbook {
 
     }
 
+
     @Override
     public boolean accept(FormatoEbook formato) {
         return FormatoEbook.PDF.equals(formato);
