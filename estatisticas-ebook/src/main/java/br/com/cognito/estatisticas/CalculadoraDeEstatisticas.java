@@ -1,18 +1,20 @@
 package br.com.cognito.estatisticas;
 
+import com.sun.tools.jconsole.JConsoleContext;
+import cotuba.domain.Ebook;
 import cotuba.plugin.AoFinalizarGeracao;
-import cotuba.plugin.EbookSoParaLeitura;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.text.Normalizer;
+import java.util.Iterator;
 import java.util.Map;
 
 public class CalculadoraDeEstatisticas implements AoFinalizarGeracao {
 
 
     @Override
-    public void aposGeracao(EbookSoParaLeitura ebook) {
+    public void aposGeracao(Ebook ebook) {
 
         var contagemDePalavras = new ContagemDePalavras();
 
@@ -38,11 +40,9 @@ public class CalculadoraDeEstatisticas implements AoFinalizarGeracao {
 
             }
 
-            for (Map.Entry<String, Integer> contagem : contagemDePalavras.entrySet()) {
-                String palavra = contagem.getKey();
-                Integer oncorrencias = contagem.getValue();
-                System.out.println(palavra + ": " + oncorrencias);
-            }
+          for (ContagemDePalavras.Contagem contagem  : contagemDePalavras) {
+              System.out.println(contagem.palavra() + " : " + contagem.ocorrencias());
+          }
         }
 
     }

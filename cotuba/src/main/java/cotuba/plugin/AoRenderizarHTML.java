@@ -8,9 +8,13 @@ public interface AoRenderizarHTML {
 
     String aposRenderizacao(String html);
 
-    static void renderizou(Capitulo capitulo) {
-        ServiceLoader.load(AoRenderizarHTML.class).forEach(plugin -> {
-            plugin.aposRenderizacao(capitulo.getConteudoHTML());
-        });
+    static String renderizou(String html) {
+        String htmlModificado = html;
+
+        for (AoRenderizarHTML plugin : ServiceLoader.load(AoRenderizarHTML.class)) {
+            htmlModificado = plugin.aposRenderizacao(htmlModificado);
+        }
+
+        return htmlModificado;
     }
 }

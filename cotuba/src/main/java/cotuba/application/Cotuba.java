@@ -30,10 +30,7 @@ public class Cotuba {
 
         List<Capitulo> capitulos = renderizador.renderiza(diretorioDosMD);
 
-        var ebook = new Ebook();
-        ebook.setFormato(formato);
-        ebook.setArquivoDeSaida(arquivoDeSaida);
-        ebook.setCapitulos(capitulos);
+        var ebook = new Ebook(arquivoDeSaida , capitulos , formato);
 
         GeradorEbook geradorEbook = geradoresEbook.stream().filter(gerador -> gerador.accept(formato))
                 .findAny().orElseThrow(() -> new IllegalArgumentException("Formato ebook inválido: " + formato));
