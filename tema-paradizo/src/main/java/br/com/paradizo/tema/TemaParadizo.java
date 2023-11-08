@@ -1,15 +1,15 @@
 package br.com.paradizo.tema;
 
-import cotuba.domain.Ebook;
 import cotuba.plugin.AoRenderizarHTML;
-import cotuba.plugin.Plugin;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class TemaParadizo implements AoRenderizarHTML {
 
-    private String cssDoTema() {
-        return FileUtils.getResourceContents("/tema.css");
+    @Override
+    public String aposRenderizacao(String html) {
+        String htmlComTema = aplicaTema(html);
+        return htmlComTema;
     }
 
     private String aplicaTema(String html) {
@@ -18,16 +18,14 @@ public class TemaParadizo implements AoRenderizarHTML {
 
         String css = cssDoTema();
 
-        document.select("head").append("<style>" + css + "</style>");
+        document.select("head")
+                .append("<style> " + css + " </style>");
 
         return document.html();
 
     }
-
-    @Override
-    public String aposRenderizacao(String html) {
-        String htmlComtema = aplicaTema(html);
-        return htmlComtema;
+    private String cssDoTema() {
+        return FileUtils.getResourceContents("/tema.css");
     }
-    
+
 }
